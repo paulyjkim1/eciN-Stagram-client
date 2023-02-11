@@ -4,11 +4,17 @@ export default function Header() {
         <div>
 
             <div className='header'>
-                <p><span className="emoji">📸</span> <span className='words'>eciN-stagram</span></p>
-                <p><span className="emoji">🏠</span> <span className='words'>Home</span></p>
-                <p><span className="emoji">🔍</span> <span className='words'>Search</span></p>
-                <p><span className="emoji">➕</span> <span className='words'>Create</span></p>
-                <p><span className="emoji">🪞</span> <span className='words'>Profile</span></p>
+                <p className='header-logo'>eciN-stagram</p>
+                <div className='header-icon'>eciN</div>
+                <div className='header-links'>
+                    <div className='link'><span className="emoji">🏠</span> <span className='words'> Home</span></div>
+                    <div className='link'><span className="emoji">🔍</span> <span className='words'> Search</span></div>
+                    <div className='link'><span className="emoji"><span className='plus'>➕</span></span> <span className='words'> Create</span></div>
+                    <div className='link'><span className="emoji"><span className='plus'>🪞</span></span> <span className='words'> Profile</span></div>
+                </div>
+                <div className='hamburgerr'>
+                    <div>H</div>
+                </div>
             </div>
             <div className='header2'>
                 <p className='logo'>eciN-stagram</p>
