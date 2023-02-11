@@ -1,38 +1,198 @@
-.App {
+.app{
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100vw;
+  flex-grow: 3;
+}
+.header {
+  margin-left: -13px;
+  color: white;
+  background-color: black;
+  display: flex;
+  font-size: 30px;
+  flex-direction: column;
+  padding-left: 30px;
+  border: 1px solid black;
+  height: 100%;
+  width: 210px;
+}
+.header-icon {
+  display: none;
+  flex-grow: 3;
+  margin-top: 25px;
+  margin-bottom: 37px;
+  margin-left: -5px;
+  padding: 8px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-size: 14px;
+  border-radius: 40px;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-icon:hover {
+  cursor: pointer;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header-icon:hover {
+  background-color: rgb(19, 19, 19);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-logo {
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+.header-links {
+  display: flex;
+  row-gap: 10px;  
+  flex-direction: column;
+  flex-grow: 2;
+  height: 100%;
+  width: 100%;
+}
+.link {
+  color: white;
+  background-color: black;
+  border: 1px solid black;
+  text-align: left;
+  left: 0;
+  padding-bottom: 6px;
+  align-items: center;
+  margin-right: 3px;
+  border-radius: 26px;
+  margin-left: -2px;
+}
+.hamburgerr {
+  flex-grow: 1;
+  margin-bottom: 10px;
+  margin-left: 3px;
+}
+.words{
+  font-size: 17px;
+  margin-left: 8px;
+}
+.emoji {
+  font-size: 24px;
+  margin-left: 10px;
+}
+.link:hover {
+  background-color: rgb(19, 19, 19);
+  transition-duration: 200ms;
+  cursor: pointer;
+}
+.header-logo:hover {
+  cursor: pointer;
+}
+.link:hover .emoji {
+  font-size: 25px;
+}
+.header2 {
+  display: none;
+  height: 60px;
+  font-size: 22px;
+  color: white;
+  align-items: center;
+  margin-left: 0px;
+  background-color: black;
+  justify-content: space-around;
+}
+.search {
+  padding: 0 16px;
+  display: flex;
+  background-color: rgb(34, 34, 34);
+  border: 1px solid rgb(34, 34, 34);
+  justify-content: flex-end;
+  font-size: 17px;
+  margin: 0 25px 0 110px;
+  width: 240px; height: 60%;
+  border-radius: 8px;
+}
+.heart {
+  display: flex;
+  justify-self: flex-end;
+  margin-right: 10px;
+  font-size: 30px;
+}
+.heart:hover {
+  cursor: pointer;
+}
+.logo:hover {
+  cursor: pointer;
+  font-style: italic;
+  transition-duration: 200ms;
+}
+.home {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  border: 1px solid rgb(33, 33, 33);
+  background-color: rgb(0, 0, 0);
+  flex-grow: 1;
+  width: 100%;
+}
+.footer {
+  color: white;
+  width: 370px; height: 100%;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(33, 33, 33);
+  padding-right: 30px;
+}
+.footer2 {
+  display: none;
+  align-items: flex-end;
+  row-gap: 20px;
+  height: 50px;
+  justify-content: space-evenly;
+  background-color: black;
+}
+.icons {
+  margin-bottom: 8px;
+  display: flex;
+  vertical-align: middle;
+  font-size: 25px;
+}
+.footer-icons{
+  margin-bottom: 20px;
+  width: 20px;
+  height: 20px;
+}
+.icons:hover {
+  font-size: 27px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+@media screen and (max-width: 1265px) {
+  .header-icon {display: flex;}
+  .header {width: 50px; align-items: start;}
+  .emoji{font-size: 26px; margin-left: 14px; margin-top: 10px;}
+  .link {width: 43px; height: 35px; margin-left: -10px; padding-top: 3px; border-radius: 42px;}
+  .plus {margin-left: -2px;}
+  .header-logo {display: none;}
+  .words {display: none;}
+  .link:hover .emoji {font-size: 27px;}
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 1000px) {
+  .footer {display: none;}
+}
+@media screen and (max-width: 770px) {
+  .header {display: none;}
+  .header2 {display: flex;}
+  .app {flex-direction: column;}
+  .footer2 {display: flex;}
+}
+@media screen and (max-width: 634px) {
+  .logo {
+    font-size: 16px;
+    width: 160px;
+    margin-left: 10px;
   }
-  to {
-    transform: rotate(360deg);
+  .heart {
+    margin-right: 20px;
+  }
+  .app {
+    column-count: 1;
+    width: 100%;
   }
 }
