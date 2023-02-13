@@ -1,6 +1,28 @@
+import { useState, useEffect} from "react";
+import { useParams } from 'react-router-dom'
 import "../../css/Profile.css";
+import axios from 'axios'
 
 export default function Profile() {
+    const [prof, setProf] = useState([])
+
+    let { id } = useParams()
+
+    // useEffect(()=> {
+    //     const fetchProfile = async() => {
+    //         try{
+    //             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
+    //             setProf(response.data)
+                
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //     fetchProfile()
+    // },[id])
+    // console.log(prof)
+
+
     // get post information from database and iterate over
     // const postComponent = post.map((post, i) => {
     //     return (
