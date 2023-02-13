@@ -132,11 +132,10 @@ export default function Footer() {
 
             </Modal>
             <div className='footer2'>
-                <div className='icons'><div className='footer-icon'>C</div></div>
                 <div className='icons'><div className='footer-icon'><Home /></div></div>
                 <div className='icons'><div className='footer-icon'><Search /></div></div>
                 <div className='icons'><div className='footer-icon'><Plus /></div></div>
-                <div className='icons'><div className='footer-icon'><span className="profile-circle"></span></div></div>
+                <div className='icons'><div className='footer-icon'><div className="footer-circle"></div></div></div>
             </div>
         </div>
     )
