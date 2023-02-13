@@ -53,8 +53,11 @@ export default function Footer() {
     let logout = async e => {
         e.preventDefault()
         try {
-            let logout = await axios.get('http://localhost:8000/logout')
-            return <Navigate to='/register' />
+            let res = await axios.get('http://localhost:8000/')
+            console.log(res.data)
+            // await axios.post('http://localhost:8000/logout')
+
+            // return <Navigate to='/register' />
         } catch(err) {
             console.log(err)
         }
@@ -129,11 +132,11 @@ export default function Footer() {
 
             </Modal>
             <div className='footer2'>
-                <div className='icons'><div className='footer-icon'>📸</div></div>
-                <div className='icons'><div className='footer-icon'>🏠</div></div>
-                <div className='icons'><div className='footer-icon'>🔍</div></div>
-                <div className='icons'><div className='footer-icon'>➕</div></div>
-                <div className='icons'><div className='footer-icon'>🪞</div></div>
+                <div className='icons'><div className='footer-icon'>C</div></div>
+                <div className='icons'><div className='footer-icon'><Home /></div></div>
+                <div className='icons'><div className='footer-icon'><Search /></div></div>
+                <div className='icons'><div className='footer-icon'><Plus /></div></div>
+                <div className='icons'><div className='footer-icon'><span className="profile-circle"></span></div></div>
             </div>
         </div>
     )
