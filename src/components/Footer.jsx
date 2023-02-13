@@ -13,13 +13,16 @@ import { AiOutlinePlusSquare as Plus } from 'react-icons/ai'
 
 let modalStyles = {
     content: {
-        backgroundColor: 'black',
+        backgroundColor: 'rgba(0,0,0)',
         color: 'white',
         border: '1px solid rgb(11, 11, 11)',
         borderRadius: '10px',
         width: '80%',
         margin: 'auto',
         height: '80%',
+    },
+    overlay:{
+        backgroundColor: 'rgba(255,255,255,.2)'
     }
 }
 
