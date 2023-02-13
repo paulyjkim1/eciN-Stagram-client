@@ -20,25 +20,42 @@ export default function Profile() {
         }
         fetchProfile()
     },[id])
-    console.log(prof.posts)
+    // console.log(prof.posts)
 
 
     // get post information from database and iterate over
     const postComponent = prof.posts?.map((post, i) => {
         return (
-            <div key ={i}>
+            
+            <div className='post' key ={i}>
                 <p>{post.image}</p>
                 <p>{post.caption}</p>
             </div>
-            // <div className="post-row">
-            //     <div className="post">
-            //         <p>{post.image}</p>
-            //         <p>{post.caption}</p>
-            //         {/* <a href="db_exampleimage.com"></a> */}
-            //     </div>
-            // </div>
         )
     })
+    console.log(postComponent)
+    console.log(postComponent?.length)
+  
+    let grouped = [];
+    let n = 3
+    for (let i = 0, j = 0; i < postComponent?.length; i++) {
+        if (i >= n && i % n === 0)
+            j++;
+        grouped[j] = grouped[j] || [];
+        grouped[j].push(postComponent[i])
+    }
+    
+    // console.log(grouped)
+
+    const groupComponent = grouped.map((group, i) => {
+        return(
+            <div className='post-row' key={i}>
+                {group}
+            </div>
+        )
+    })
+    console.log(groupComponent)
+    
 
     return (
         <div className="body">
@@ -69,7 +86,7 @@ export default function Profile() {
             </div>
             <div className="posts">
                 {/* iterated posts from db */}
-                {postComponent}
+                {groupComponent}
             </div>
         </div>
     );
