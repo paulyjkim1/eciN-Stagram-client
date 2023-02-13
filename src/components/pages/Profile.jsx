@@ -2,9 +2,28 @@ import { useState, useEffect} from "react";
 import { useParams } from 'react-router-dom'
 import "../../css/Profile.css";
 import axios from 'axios'
+import Modal from 'react-modal'
+
+let modalStyles = {
+    content: {
+        backgroundColor: 'rgba(0,0,0)',
+        color: 'white',
+        border: '1px solid rgb(11, 11, 11)',
+        borderRadius: '10px',
+        width: '80%',
+        margin: 'auto',
+        height: '80%',
+    },
+    overlay:{
+        backgroundColor: 'rgba(255,255,255,.2)'
+    }
+}
 
 export default function Profile() {
     const [prof, setProf] = useState([])
+    const [postIsOpen, setPostIsOpen] = useState(false)
+    const [details, setDetails] = useState([])
+
 
     let { id } = useParams()
 
@@ -20,28 +39,68 @@ export default function Profile() {
         }
         fetchProfile()
     },[id])
-    console.log(prof.posts)
+    // console.log(prof.posts)
 
+    function openPost(e) {
+        setDetails(prof?.posts[e])
+        setPostIsOpen(true)
+    }
+    function closePost(e) {
+        setPostIsOpen(false)
+    }
+    
 
     // get post information from database and iterate over
     const postComponent = prof.posts?.map((post, i) => {
         return (
-            <div key ={i}>
-                <p>{post.image}</p>
-                <p>{post.caption}</p>
-            </div>
-            // <div className="post-row">
-            //     <div className="post">
-            //         <p>{post.image}</p>
-            //         <p>{post.caption}</p>
-            //         {/* <a href="db_exampleimage.com"></a> */}
-            //     </div>
-            // </div>
+            <p onClick={() => openPost(i)} className='post' key={i}>{post.image}</p>
         )
     })
+    console.log(postComponent)
+    console.log(postComponent?.length)
+  
+    let grouped = [];
+    let n = 3
+    for (let i = 0, j = 0; i < postComponent?.length; i++) {
+        if (i >= n && i % n === 0)
+            j++;
+        grouped[j] = grouped[j] || [];
+        grouped[j].push(postComponent[i])
+    }
+    
+    // console.log(grouped)
+
+    const groupComponent = grouped.map((group, i) => {
+        return(
+            <div className='post-row' key={i}>
+                {group}
+            </div>
+        )
+    })
+    console.log(groupComponent)
+    
 
     return (
         <div className="body">
+            <Modal
+                isOpen={postIsOpen}
+                onRequestClose={closePost}
+                style={modalStyles}
+            >
+                <div className='modal'>
+                    <h1 className='modal-header'>{details?.image}</h1>
+                    <p>{details?.caption}</p>
+                    <form>
+                        <input 
+                            className='modal-input'
+                            name='username'
+                            placeholder='Username'
+                        />
+                    </form>
+                    <button className='modal-close' onClick={() => closePost()}>X</button>
+                </div>
+
+            </Modal>
             {/* Hello from Profile */}
             <div className="user-info">
                 {/* username */}
@@ -69,7 +128,7 @@ export default function Profile() {
             </div>
             <div className="posts">
                 {/* iterated posts from db */}
-                {postComponent}
+                {groupComponent}
             </div>
         </div>
     );
