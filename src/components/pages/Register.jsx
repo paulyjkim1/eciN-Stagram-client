@@ -10,14 +10,14 @@ export default function Register() {
     let [email, setEmail] = useState('')
     let [password, setPassword] = useState('')
 
-
+    let [loginSignup, setLoginSignup] = useState(true)
     
     
     let csrftoken = Cookies.get('csrftoken')
-    if (csrftoken) {
-        return <Navigate to='/' />
-    }
-    let handleSubmit = async e => {
+    // if (csrftoken) {
+    //     return <Navigate to='/' />
+    // }
+    let handleSignUp = async e => {
         e.preventDefault()
         try {
             let form = {
@@ -33,17 +33,34 @@ export default function Register() {
         }
     }
 
+    let handleLogIn = async(e) => {
+        e.preventDefault()
+        try {  
+            let form = {
+                email,
+                password
+            }
+            let login = await axios.get('http://localhost:8000/login', form)
+            console.log(login.data)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
-    return(
+    let loginSignupToggle = () => {
+        setLoginSignup(!loginSignup)
+    }
+
+    let register = (
         <div className='register'>
             <h1 className='registerTitle'>REGISTER</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor='username'>Us er... name:</label>
+            <form onSubmit={handleSignUp}>
+                <label htmlFor='username'>Username:</label>
                 <input 
                     type='text' 
                     name='username' 
                     id='username' 
-                    placeholder='BamesJond2'
+                    placeholder='Username...'
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                 />
@@ -52,7 +69,7 @@ export default function Register() {
                     type='email'
                     name='email'
                     id='email'
-                    placeholder='shaken@hotmale.com'
+                    placeholder='sample@email.com'
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
@@ -61,12 +78,44 @@ export default function Register() {
                     type='password'
                     name='password'
                     id='password'
-                    placeholder='h0n3YRyd3r!'
+                    placeholder='********!'
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
                 <button type='submit'>Register</button>
             </form>
+            <button type='button' onClick={loginSignupToggle}>Already have an account? Log in</button>
+        </div>
+    )
+    let logIn = (
+        <div>
+            <h1 className='loginTitle'>LOG IN</h1>
+            <form onSubmit={handleLogIn}>
+                <label htmlFor='email'>Email:</label>
+                <input
+                    type='email'
+                    name='email'
+                    id='email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                />
+                <label htmlFor="password">Password:</label>
+                <input
+                    type='password'
+                    name='password'
+                    id='password'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                />
+                <button type='submit'>Log in</button>
+            </form>
+            <button type='button' onClick={loginSignupToggle}>need signup?  Log in</button>
+        </div>
+    )
+
+    return(
+        <div>
+            {loginSignup ? register : logIn}
         </div>
     )
 }
