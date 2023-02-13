@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './components/pages/Home'
 import Profile from './components/pages/Profile'
+import Register from './components/pages/Register'
 
 import './css/App.css';
 
@@ -17,6 +18,8 @@ function App() {
           <Route path="/" element={<Home />} />
           
           <Route path="/profile/:id" element={<Profile />} />
+
+          <Route path="/register" element={<Register />} />
         </Routes>
       <Footer />
       </Router>

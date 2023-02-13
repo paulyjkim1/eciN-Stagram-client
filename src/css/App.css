@@ -3,18 +3,16 @@
   justify-content: space-between;
   height: 100vh;
   width: 100vw;
-  flex-grow: 3;
 }
 .header {
-  margin-left: -13px;
+  display: flex;
+  margin-left: 0;
   color: white;
   background-color: black;
-  display: flex;
   font-size: 30px;
   flex-direction: column;
-  padding-left: 30px;
-  border: 1px solid black;
-  height: 100%;
+  padding-left: 20px;
+  height: 100vh;
   width: 210px;
 }
 .header-icon {
@@ -45,38 +43,46 @@
 }
 .header-links {
   display: flex;
-  row-gap: 10px;  
+  row-gap: 15px;  
   flex-direction: column;
   flex-grow: 2;
-  height: 100%;
+  margin-left: px;
+  height: 99%;
   width: 100%;
 }
-.link {
+.link{
+  display:flex;
+  align-items: center;
   color: white;
   background-color: black;
   border: 1px solid black;
   text-align: left;
   left: 0;
-  padding-bottom: 6px;
-  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 8px;
   margin-right: 3px;
   border-radius: 26px;
   margin-left: -2px;
 }
 .hamburgerr {
-  flex-grow: 1;
-  margin-bottom: 10px;
-  margin-left: 3px;
+  position: absolute;
+  top: 93%;
+  width: 200px;
+  height: 0%;
 }
+
 .words{
   font-size: 17px;
-  margin-left: 8px;
-}
-.emoji {
-  font-size: 24px;
   margin-left: 10px;
 }
-.link:hover {
+.emoji {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 28px;
+  margin-left: 10px;
+}
+.link:hover{
   background-color: rgb(19, 19, 19);
   transition-duration: 200ms;
   cursor: pointer;
@@ -84,8 +90,14 @@
 .header-logo:hover {
   cursor: pointer;
 }
-.link:hover .emoji {
-  font-size: 25px;
+.profile-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 20px;
+  border: 1px solid white;
+  margin-left: 13px;
+  margin-top: 4px;
+  transform: translateY(-2px)
 }
 .header2 {
   display: none;
@@ -127,16 +139,17 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  border: 1px solid rgb(33, 33, 33);
+  border-left: 1px solid rgb(33, 33, 33);
   background-color: rgb(0, 0, 0);
-  flex-grow: 1;
   width: 100%;
+  height: 100%;
 }
 .footer {
+  display: flex;
   color: white;
   width: 370px; height: 100%;
   background-color: rgb(0, 0, 0);
-  border: 1px solid rgb(33, 33, 33);
+
   padding-right: 30px;
 }
 .footer2 {
@@ -146,6 +159,9 @@
   height: 50px;
   justify-content: space-evenly;
   background-color: black;
+}
+.plus {
+  transform: translateY(3px);
 }
 .icons {
   margin-bottom: 8px;
@@ -158,20 +174,16 @@
   width: 20px;
   height: 20px;
 }
-.icons:hover {
-  font-size: 27px;
-  cursor: pointer;
-}
 
 @media screen and (max-width: 1265px) {
   .header-icon {display: flex;}
   .header {width: 50px; align-items: start;}
-  .emoji{font-size: 26px; margin-left: 14px; margin-top: 10px;}
-  .link {width: 43px; height: 35px; margin-left: -10px; padding-top: 3px; border-radius: 42px;}
+  .emoji{font-size: 26px; margin-left: 8px; margin-top: 2px;}
+  .profile-circle{margin-left: 9.4px; margin-top: 8px;}
+  .link {width: 43px; height: 32px; margin-left: -6px; padding-top: 3px; border-radius: 42px; align-items: center;} 
   .plus {margin-left: -2px;}
   .header-logo {display: none;}
   .words {display: none;}
-  .link:hover .emoji {font-size: 27px;}
 }
 @media screen and (max-width: 1000px) {
   .footer {display: none;}

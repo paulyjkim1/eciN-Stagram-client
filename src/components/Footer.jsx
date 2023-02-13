@@ -1,6 +1,15 @@
 import '../css/Footer.css'
 import { useState } from 'react'
+import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 import Modal from 'react-modal'
+
+// Icon imports
+import { TiThMenu as Hamburger } from 'react-icons/ti'
+import { BiSearchAlt as Search } from 'react-icons/bi'
+import { AiFillHome as Home } from 'react-icons/ai'
+import { AiOutlinePlusSquare as Plus } from 'react-icons/ai'
+
 
 let modalStyles = {
     content: {
@@ -40,12 +49,23 @@ export default function Footer() {
         e.preventDefault()
         setSignUpIsOpen(false)
     }
+
+    let logout = async e => {
+        e.preventDefault()
+        try {
+            let logout = await axios.get('http://localhost:8000/logout')
+            return <Navigate to='/register' />
+        } catch(err) {
+            console.log(err)
+        }
+    }
     return(
 
 
         <div>
             <div className='footer'>
                 <div className='login-sinup'>
+                    <button onClick={logout}> Logout</button>
                     <div className='login-text'>Have an account?</div>
                     <div className='login' onClick={openLogin}>Make Post Modal</div>
                     <div className='login-text'>New to eciN-stagram?</div>
