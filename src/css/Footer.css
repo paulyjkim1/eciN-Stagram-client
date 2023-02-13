@@ -55,3 +55,27 @@
     border: 2px solid rgb(33, 33, 33);
     border-radius: 7px;
 }
+.footer-circle {
+    width: 23px;
+    height: 23px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    border: 1px solid white;
+}
+.icons {
+    margin-bottom: 8px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    font-size: 26px;
+    border-radius: 20px;
+  }
+.footer-icons{
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+  }
+.icons:hover {
+    transform: translateY(-4px)
+}
