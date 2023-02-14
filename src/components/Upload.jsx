@@ -29,7 +29,6 @@ export default function Upload() {
                 <input 
                     type="file"
                     onChange={onInputChange}
-                    required
                 />
             </div>
             <button>Submit</button>
