@@ -41,9 +41,14 @@ export default function Profile() {
     },[id])
     // console.log(prof.posts)
 
-    function openPost(e) {
+    const openPost = async(e) => {
         setDetails(prof?.posts[e])
         setPostIsOpen(true)
+        const url = `${process.env.REACT_APP_SERVER_URL}/posts/${prof?.posts[e].id}/comments`
+        const commentResponse = await axios.get(url)
+    
+        console.log(commentResponse.data)
+        
     }
     function closePost(e) {
         setPostIsOpen(false)
@@ -56,8 +61,7 @@ export default function Profile() {
             <p onClick={() => openPost(i)} className='post' key={i}>{post.image}</p>
         )
     })
-    console.log(postComponent)
-    console.log(postComponent?.length)
+
   
     let grouped = [];
     let n = 3
@@ -77,7 +81,6 @@ export default function Profile() {
             </div>
         )
     })
-    console.log(groupComponent)
     
 
     return (
@@ -86,6 +89,7 @@ export default function Profile() {
                 isOpen={postIsOpen}
                 onRequestClose={closePost}
                 style={modalStyles}
+                ariaHideApp={false}
             >
                 <div className='modal'>
                     <h1 className='modal-header'>{details?.image}</h1>
