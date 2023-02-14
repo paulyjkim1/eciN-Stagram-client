@@ -128,6 +128,8 @@
 }
 .heart:hover {
   cursor: pointer;
+  transition: .2s cubic-bezier(.17,.67,.83,.67);
+  color: rgb(249, 109, 109);
 }
 .logo:hover {
   cursor: pointer;
@@ -163,17 +165,8 @@
 .plus {
   transform: translateY(3px);
 }
-.icons {
-  margin-bottom: 8px;
-  display: flex;
-  vertical-align: middle;
-  font-size: 25px;
-}
-.footer-icons{
-  margin-bottom: 20px;
-  width: 20px;
-  height: 20px;
-}
+
+
 
 @media screen and (max-width: 1265px) {
   .header-icon {display: flex;}
@@ -206,5 +199,42 @@
   .app {
     column-count: 1;
     width: 100%;
+  }
+}
+@media screen and (max-width: 414px) {
+  .search{
+    display: none;
+  }
+  .logo{
+    margin-left: 0px;
+  }
+  .heart{
+    margin-right: 0px;
+  }
+  .app{
+    width: 102.2vw;
+    height: 100.2vh;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width : 400px) {
+  .search {
+    display: none;
+  }
+  .app{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+  }
+}
+@media screen and (max-width: 390px) {
+  .app {
+    height: 98.2vh;
+  }
+} 
+@media screen and (max-width: 360px) {
+  .app {
+    height: 100vh;
   }
 }

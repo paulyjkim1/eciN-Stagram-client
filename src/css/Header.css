@@ -1,0 +1,18 @@
+.ham-modal{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin-top: -20px;
+}
+.ham-modal-item {
+    display: flex;
+    align-items: center;
+    width: 239px;
+    height: 50px;
+    margin-left: -20px;
+    padding-left: 16px;
+}
+.ham-modal-item:hover {
+    background-color: rgb(5, 5, 5);
+    cursor: pointer;
+}
