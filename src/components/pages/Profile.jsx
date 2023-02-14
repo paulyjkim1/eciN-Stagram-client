@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import "../../css/Profile.css";
 import axios from 'axios'
 import Modal from 'react-modal'
+import * as toxicity from '@tensorflow-models/toxicity'
 
 let modalStyles = {
     content: {
@@ -92,18 +93,33 @@ export default function Profile() {
 
     function handleChange(e){
         setNewComment(e.target.value)
-        console.log(newComment)
     }
 
-    function addComment(e){
+    const addComment= async(e) => {
         e.preventDefault()
-        console.log(newComment)
-        // setNewComment(newComment)
-        classify(newComment)
+        const model = await toxicity.load(0.8)
+        const text = newComment
+        const predictions = await classify(model, text)
+        if (predictions.length == 0) {
+            console.log('not toxic')
+          } else {
+            console.log(predictions)
+          }
+        
         
     }
+    const classify = async (model, text) => {
+        const sentences = [text]; // The model takes list as input
+        let predictions = await model.classify(sentences);
+        predictions = predictions.map(prediction => ({
+          label: prediction["label"],
+          match: prediction.results[0]["match"]
+        })) // Label is like "identity_threat", "toxicity"
+        // match is whether the text matches the label
+        return predictions.filter(p => p.match).map(p => p.label) // This gives us a list like ["identity_threat", "toxocity"]
+      }
 
-    
+
     
 
     return (
