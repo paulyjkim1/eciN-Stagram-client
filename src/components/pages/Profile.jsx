@@ -24,6 +24,7 @@ export default function Profile() {
     const [postIsOpen, setPostIsOpen] = useState(false)
     const [details, setDetails] = useState([])
     const [comments, setComments] = useState([])
+    const [newComment, setNewComment] = useState('')
 
 
     let { id } = useParams()
@@ -87,6 +88,22 @@ export default function Profile() {
             </div>
         )
     })
+
+
+    function handleChange(e){
+        setNewComment(e.target.value)
+        console.log(newComment)
+    }
+
+    function addComment(e){
+        e.preventDefault()
+        console.log(newComment)
+        // setNewComment(newComment)
+        classify(newComment)
+        
+    }
+
+    
     
 
     return (
@@ -101,12 +118,15 @@ export default function Profile() {
                     <h1 className='modal-header'>{details?.image}</h1>
                     <p>{details?.caption}</p>
                     <div>{commentComponent}</div>
-                    <form>
+                    <form onSubmit={addComment}>
                         <input 
                             className='modal-input'
                             name='newComment'
                             placeholder='New Comment'
+                            onChange={handleChange}
+                            value={newComment}
                         />
+                        <button type="submit">Post</button>
                     </form>
                     <button className='modal-close' onClick={() => closePost()}>X</button>
                 </div>
