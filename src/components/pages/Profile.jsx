@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import "../../css/Profile.css";
 import axios from 'axios'
 import Modal from 'react-modal'
+import * as toxicity from '@tensorflow-models/toxicity'
 
 let modalStyles = {
     content: {
@@ -23,6 +24,8 @@ export default function Profile() {
     const [prof, setProf] = useState([])
     const [postIsOpen, setPostIsOpen] = useState(false)
     const [details, setDetails] = useState([])
+    const [comments, setComments] = useState([])
+    const [newComment, setNewComment] = useState('')
 
 
     let { id } = useParams()
@@ -41,9 +44,14 @@ export default function Profile() {
     },[id])
     // console.log(prof.posts)
 
-    function openPost(e) {
+    const openPost = async(e) => {
         setDetails(prof?.posts[e])
         setPostIsOpen(true)
+        const url = `${process.env.REACT_APP_SERVER_URL}/posts/${prof?.posts[e].id}/comments`
+        const commentResponse = await axios.get(url)
+        setComments(commentResponse?.data)
+        
+        
     }
     function closePost(e) {
         setPostIsOpen(false)
@@ -56,8 +64,12 @@ export default function Profile() {
             <p onClick={() => openPost(i)} className='post' key={i}>{post.image}</p>
         )
     })
-    console.log(postComponent)
-    console.log(postComponent?.length)
+    const commentComponent = comments?.map((comment, i)=> {
+        return(
+            <p className = 'postComment' key={i}>{comment?.content}</p>
+        )
+    })
+
   
     let grouped = [];
     let n = 3
@@ -77,7 +89,37 @@ export default function Profile() {
             </div>
         )
     })
-    console.log(groupComponent)
+
+
+    function handleChange(e){
+        setNewComment(e.target.value)
+    }
+
+    const addComment= async(e) => {
+        e.preventDefault()
+        const model = await toxicity.load(0.8)
+        const text = newComment
+        const predictions = await classify(model, text)
+        if (predictions.length == 0) {
+            console.log('not toxic')
+          } else {
+            console.log(predictions)
+          }
+        
+        
+    }
+    const classify = async (model, text) => {
+        const sentences = [text]; // The model takes list as input
+        let predictions = await model.classify(sentences);
+        predictions = predictions.map(prediction => ({
+          label: prediction["label"],
+          match: prediction.results[0]["match"]
+        })) // Label is like "identity_threat", "toxicity"
+        // match is whether the text matches the label
+        return predictions.filter(p => p.match).map(p => p.label) // This gives us a list like ["identity_threat", "toxocity"]
+      }
+
+
     
 
     return (
@@ -86,16 +128,21 @@ export default function Profile() {
                 isOpen={postIsOpen}
                 onRequestClose={closePost}
                 style={modalStyles}
+                ariaHideApp={false}
             >
                 <div className='modal'>
                     <h1 className='modal-header'>{details?.image}</h1>
                     <p>{details?.caption}</p>
-                    <form>
+                    <div>{commentComponent}</div>
+                    <form onSubmit={addComment}>
                         <input 
                             className='modal-input'
-                            name='username'
-                            placeholder='Username'
+                            name='newComment'
+                            placeholder='New Comment'
+                            onChange={handleChange}
+                            value={newComment}
                         />
+                        <button type="submit">Post</button>
                     </form>
                     <button className='modal-close' onClick={() => closePost()}>X</button>
                 </div>
