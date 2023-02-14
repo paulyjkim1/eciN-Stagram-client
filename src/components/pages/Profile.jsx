@@ -23,6 +23,7 @@ export default function Profile() {
     const [prof, setProf] = useState([])
     const [postIsOpen, setPostIsOpen] = useState(false)
     const [details, setDetails] = useState([])
+    const [comments, setComments] = useState([])
 
 
     let { id } = useParams()
@@ -46,8 +47,8 @@ export default function Profile() {
         setPostIsOpen(true)
         const url = `${process.env.REACT_APP_SERVER_URL}/posts/${prof?.posts[e].id}/comments`
         const commentResponse = await axios.get(url)
-    
-        console.log(commentResponse.data)
+        setComments(commentResponse?.data)
+        
         
     }
     function closePost(e) {
@@ -59,6 +60,11 @@ export default function Profile() {
     const postComponent = prof.posts?.map((post, i) => {
         return (
             <p onClick={() => openPost(i)} className='post' key={i}>{post.image}</p>
+        )
+    })
+    const commentComponent = comments?.map((comment, i)=> {
+        return(
+            <p className = 'postComment' key={i}>{comment?.content}</p>
         )
     })
 
@@ -94,11 +100,12 @@ export default function Profile() {
                 <div className='modal'>
                     <h1 className='modal-header'>{details?.image}</h1>
                     <p>{details?.caption}</p>
+                    <div>{commentComponent}</div>
                     <form>
                         <input 
                             className='modal-input'
-                            name='username'
-                            placeholder='Username'
+                            name='newComment'
+                            placeholder='New Comment'
                         />
                     </form>
                     <button className='modal-close' onClick={() => closePost()}>X</button>
