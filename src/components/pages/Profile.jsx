@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import "../../css/Profile.css";
 import axios from 'axios'
 import Modal from 'react-modal'
+import Upload from "../Upload";
 
 let modalStyles = {
     content: {
@@ -126,6 +127,9 @@ export default function Profile() {
                 <p className="tab">Saved</p>
                 <p className="tab">Tagged</p>
             </div>
+
+            <Upload />
+
             <div className="posts">
                 {/* iterated posts from db */}
                 {groupComponent}
