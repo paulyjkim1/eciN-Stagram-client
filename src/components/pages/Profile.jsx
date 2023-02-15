@@ -20,7 +20,7 @@ let modalStyles = {
     }
 }
 
-export default function Profile(props) {
+export default function Profile( { currentUser } ) {
     const [prof, setProf] = useState([])
     const [postIsOpen, setPostIsOpen] = useState(false)
     const [details, setDetails] = useState([])
@@ -102,9 +102,9 @@ export default function Profile(props) {
         const predictions = await classify(model, text)
         if (predictions.length == 0) {
             console.log('not toxic')
-            console.log(props.currentUser)
+            console.log(currentUser)
             const reqbody = {
-                userId: props.currentUser,
+                userId: currentUser,
                 postId: details.id,
                 content: text,
             }
@@ -112,9 +112,8 @@ export default function Profile(props) {
             console.log(predictions)
             
           }
-        
-        
     }
+
     const classify = async (model, text) => {
         const sentences = [text]; // The model takes list as input
         let predictions = await model.classify(sentences);

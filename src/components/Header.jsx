@@ -11,7 +11,7 @@ import '../css/Header.css'
 
 
 
-export default function Header({ handleLogout }) {
+export default function Header({ handleLogout, currentUser }) {
 
     let [hamburger, setHamburger] = useState(false)
 

@@ -23,7 +23,8 @@ function App() {
     }
   }, [])
 
-  let handleLogout = () => {
+  let handleLogout = (e) => {
+    e.preventDefault()
     console.log('loggin out')
     if (localStorage.getItem('jwt')) {
       localStorage.removeItem('jwt')
@@ -34,7 +35,7 @@ function App() {
   return (
     <div className='app'>
       <Router>
-      <Header handleLogout={handleLogout}/>
+      <Header currentUser={currentUser} handleLogout={handleLogout}/>
         <Routes>
           <Route path="/" element={<Home currentUser={currentUser} />} />
           
