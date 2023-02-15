@@ -8,7 +8,7 @@ export default function Upload(props) {
     })
     console.log(caption)
     const [file, setFile] = useState([null])
-    // console.log(file)
+    console.log(file)
 
     const onInputChange = (e) => {
         setFile(e.target.files[0])
@@ -18,8 +18,8 @@ export default function Upload(props) {
         e.preventDefault()
         
         try {
-            console.log(props.currentUser.id)
-            const reqbody = { caption, file, userId: props.currentUser }
+            // console.log(props.currentUser.id)
+            const reqbody = { caption, file, userId: props.currentUser._id }
             const responseData = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, reqbody)  
             console.log(responseData)
             // after it posts close the modal 
