@@ -2,20 +2,25 @@ import axios from "axios";
 import { React, useState } from "react";
 
 
-export default function Upload() {
+export default function Upload(props) {
+    const [caption, setCaption] = useState({
+        caption: ''
+    })
+    console.log(caption)
     const [file, setFile] = useState([null])
-    const [userId, setUserId] = useState([])
+    // console.log(file)
 
     const onInputChange = (e) => {
         setFile(e.target.files[0])
-        setUserId()
     }
 
     const onSubmit = async (e) => {
         e.preventDefault()
-
+        
         try {
-            const responseData = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`)  
+            console.log(props.currentUser.id)
+            const reqbody = { caption, file, userId: props.currentUser }
+            const responseData = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, reqbody)  
             console.log(responseData)
             // after it posts close the modal 
             // code here later
@@ -32,8 +37,13 @@ export default function Upload() {
                     type="file"
                     id="image"
                     onChange={onInputChange}
-                />
-                <textarea id="caption"></textarea>
+                    />
+                <textarea 
+                    id="caption"
+                    value={caption.caption}
+                    onChange={e => setCaption({ ...caption, caption: e.target.value})}
+                >
+                </textarea>
             </div>
             <button>Submit</button>
         </form>

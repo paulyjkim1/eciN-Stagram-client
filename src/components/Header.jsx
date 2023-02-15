@@ -6,19 +6,43 @@ import { BiSearchAlt as Search } from 'react-icons/bi'
 import { AiFillHome as Home } from 'react-icons/ai'
 import { AiOutlinePlusSquare as Plus } from 'react-icons/ai'
 
+import Upload from './Upload'
 import '../css/Header.css'
 
-
+let modalStyles = {
+    content: {
+        backgroundColor: 'rgba(0,0,0)',
+        color: 'white',
+        border: '1px solid rgb(11, 11, 11)',
+        borderRadius: '10px',
+        width: '80%',
+        margin: 'auto',
+        height: '80%',
+    },
+    overlay:{
+        backgroundColor: 'rgba(255,255,255,.2)'
+    }
+}
 
 export default function Header() {
 
     let [hamburger, setHamburger] = useState(false)
+    
+    const [newPostIsOpen, setNewPostIsOpen] = useState(false)
 
     let hamburgerOpen = () => {
         setHamburger(true)
     }
     let hamburgerClose = () => {
         setHamburger(false)
+    }
+
+    const openNewPost = async(e) => {
+        setNewPostIsOpen(true)
+    }
+
+    function closeNewPost(e) {
+        setNewPostIsOpen(false)
     }
 
     return(
@@ -30,9 +54,18 @@ export default function Header() {
                 <div className='header-links'>
                     <div className='link'><span className="emoji"><Home /></span> <div className='words'>Home</div></div>
                     <div className='link'><span className="emoji"><Search /></span> <div className='words'>Search</div></div>
-                    <div className='link'><span className="emoji"><Plus /></span> <div className='words'>Create</div></div>
+                    <div className='link' onClick={openNewPost} ><span className="emoji"><Plus /></span> <div className='words'>Create</div></div>
                     <div className='link'><span className="profile-circle"></span>  <div className='words'>Profile</div></div>
                 </div>
+                <Modal
+                    isOpen={newPostIsOpen}
+                    onRequestClose={closeNewPost}
+                    style={modalStyles}
+                    ariaHideApp={false}
+                >
+                    <Upload />
+                    <button className='modal-close' onClick={() => closeNewPost()}>X</button>
+                </Modal>
                 <Modal
                     isOpen={hamburger}
                     onRequestClose={hamburgerClose}
