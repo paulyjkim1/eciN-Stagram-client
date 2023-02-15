@@ -32,6 +32,7 @@ export default function Profile() {
         const fetchProfile = async() => {
             try{
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
+                // console.log(response)
                 setProf(response.data)
                 
             }catch(err){
@@ -127,8 +128,6 @@ export default function Profile() {
                 <p className="tab">Saved</p>
                 <p className="tab">Tagged</p>
             </div>
-
-            <Upload />
 
             <div className="posts">
                 {/* iterated posts from db */}
