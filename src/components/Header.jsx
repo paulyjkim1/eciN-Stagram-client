@@ -11,7 +11,7 @@ import '../css/Header.css'
 
 
 
-export default function Header() {
+export default function Header({ handleLogout }) {
 
     let [hamburger, setHamburger] = useState(false)
 
@@ -79,7 +79,7 @@ export default function Header() {
                         <Link to='/register' className='Link'>
                             <div className='ham-modal-item'>Switch accounts</div>
                         </Link>
-                        <div className='ham-modal-item'>Log out</div>
+                        <div className='ham-modal-item' onClick={handleLogout}>Log out</div>
                     </div>
 
                 </Modal>

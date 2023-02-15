@@ -21,11 +21,14 @@ function App() {
     else {
       setCurrentUser(null)
     }
-  })
+  }, [])
 
   let handleLogout = () => {
-    localStorage.removeItem('jwt')
-    setCurrentUser(null)
+    console.log('loggin out')
+    if (localStorage.getItem('jwt')) {
+      localStorage.removeItem('jwt')
+      setCurrentUser(null)
+    }
   }
 
   return (
@@ -33,11 +36,11 @@ function App() {
       <Router>
       <Header handleLogout={handleLogout}/>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home currentUser={currentUser} />} />
           
           <Route path="/profile/:id" element={<Profile />} />
 
-          <Route path="/register" element={<Register setCurrentUser={setCurrentUser} />} />
+          <Route path="/register" element={<Register currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
         </Routes>
       <Footer />
       </Router>

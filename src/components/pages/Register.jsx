@@ -14,7 +14,10 @@ export default function Register({ currentUser, setCurrentUser }) {
 
     let [loginSignup, setLoginSignup] = useState(true)
     
-    
+    if(currentUser) {
+        return <Navigate to='/' />
+    }
+
     let handleSignUp = async e => {
         e.preventDefault()
         try {
@@ -24,12 +27,14 @@ export default function Register({ currentUser, setCurrentUser }) {
                 password
             }
             let response = await axios.post('http://localhost:8000/users/register', form)
-            let token = response.data
+            let { token } = response.data
+            console.log(token)
             localStorage.setItem('jwt', token)
 
             let decoded = jwt_decode(token)
-
+            console.log(decoded)
             setCurrentUser(decoded)
+            console.log(currentUser)
         }
         catch(err) {
             setMsg('Email already exists')
@@ -44,14 +49,20 @@ export default function Register({ currentUser, setCurrentUser }) {
                 email,
                 password
             }
-            let login = await axios.get('http://localhost:8000/login', form)
-            console.log(login.data)
+            let login = await axios.post('http://localhost:8000/users/login', form)
+
+            let { token } = login.data
+            let decoded = jwt_decode(token)
+            setCurrentUser(decoded)
+            // console.log(login.data)
         } catch(err) {
+            setMsg('Invalid email or password')
             console.log(err)
         }
     }
 
     let loginSignupToggle = () => {
+        setMsg(null)
         setLoginSignup(!loginSignup)
     }
 
@@ -98,6 +109,7 @@ export default function Register({ currentUser, setCurrentUser }) {
     let logIn = (
         <div>
             <h1 className='loginTitle'>LOG IN</h1>
+            <h1>{msg ? msg : null}</h1>
             <form onSubmit={handleLogIn}>
                 <label htmlFor='email'>Email:</label>
                 <input
@@ -107,6 +119,7 @@ export default function Register({ currentUser, setCurrentUser }) {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
+                <br />
                 <label htmlFor="password">Password:</label>
                 <input
                     type='password'
@@ -115,6 +128,7 @@ export default function Register({ currentUser, setCurrentUser }) {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
+                <br />
                 <button type='submit'>Log in</button>
             </form>
             <button type='button' onClick={loginSignupToggle}>need signup?  Log in</button>
