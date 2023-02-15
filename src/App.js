@@ -38,7 +38,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home currentUser={currentUser} />} />
           
-          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile currentUser={currentUser}/>} />
 
           <Route path="/register" element={<Register currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
         </Routes>

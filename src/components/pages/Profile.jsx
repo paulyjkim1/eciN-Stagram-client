@@ -20,7 +20,7 @@ let modalStyles = {
     }
 }
 
-export default function Profile() {
+export default function Profile(props) {
     const [prof, setProf] = useState([])
     const [postIsOpen, setPostIsOpen] = useState(false)
     const [details, setDetails] = useState([])
@@ -102,8 +102,15 @@ export default function Profile() {
         const predictions = await classify(model, text)
         if (predictions.length == 0) {
             console.log('not toxic')
+            console.log(props.currentUser)
+            const reqbody = {
+                userId: props.currentUser,
+                postId: details.id,
+                content: text,
+            }
           } else {
             console.log(predictions)
+            
           }
         
         
