@@ -1,3 +1,4 @@
+
 .ham-modal{
     display: flex;
     flex-direction: column;
@@ -15,4 +16,9 @@
 .ham-modal-item:hover {
     background-color: rgb(5, 5, 5);
     cursor: pointer;
+}
+
+.Link {
+    text-decoration: none;
+    color: white;
 }
