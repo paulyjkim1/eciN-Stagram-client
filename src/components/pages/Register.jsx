@@ -1,22 +1,23 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
 import '../../css/Register.css'
 
-export default function Register() {
+export default function Register({ currentUser, setCurrentUser }) {
     let [username, setUsername] = useState('')
     let [email, setEmail] = useState('')
     let [password, setPassword] = useState('')
+    let [msg, setMsg] = useState('')
 
     let [loginSignup, setLoginSignup] = useState(true)
     
-    
-    let csrftoken = Cookies.get('csrftoken')
-    // if (csrftoken) {
-    //     return <Navigate to='/' />
-    // }
+    if(currentUser) {
+        return <Navigate to='/' />
+    }
+
     let handleSignUp = async e => {
         e.preventDefault()
         try {
@@ -26,9 +27,17 @@ export default function Register() {
                 password
             }
             let response = await axios.post('http://localhost:8000/users/register', form)
-            console.log(response.data)
+            let { token } = response.data
+            console.log(token)
+            localStorage.setItem('jwt', token)
+
+            let decoded = jwt_decode(token)
+            console.log(decoded)
+            setCurrentUser(decoded)
+            console.log(currentUser)
         }
         catch(err) {
+            setMsg('Email already exists')
             console.log(err)
         }
     }
@@ -40,20 +49,27 @@ export default function Register() {
                 email,
                 password
             }
-            let login = await axios.get('http://localhost:8000/login', form)
-            console.log(login.data)
+            let login = await axios.post('http://localhost:8000/users/login', form)
+
+            let { token } = login.data
+            let decoded = jwt_decode(token)
+            setCurrentUser(decoded)
+            // console.log(login.data)
         } catch(err) {
+            setMsg('Invalid email or password')
             console.log(err)
         }
     }
 
     let loginSignupToggle = () => {
+        setMsg(null)
         setLoginSignup(!loginSignup)
     }
 
     let register = (
         <div className='register'>
             <h1 className='registerTitle'>REGISTER</h1>
+            <h1>{msg ? msg : null}</h1>
             <form onSubmit={handleSignUp}>
                 <label htmlFor='username'>Username:</label>
                 <input 
@@ -64,6 +80,7 @@ export default function Register() {
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                 />
+                <br />
                 <label htmlFor='email'>Email:</label>
                 <input
                     type='email'
@@ -73,6 +90,7 @@ export default function Register() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
+                <br />
                 <label htmlFor="password">Password:</label>
                 <input 
                     type='password'
@@ -82,6 +100,7 @@ export default function Register() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
+                <br />
                 <button type='submit'>Register</button>
             </form>
             <button type='button' onClick={loginSignupToggle}>Already have an account? Log in</button>
@@ -90,6 +109,7 @@ export default function Register() {
     let logIn = (
         <div>
             <h1 className='loginTitle'>LOG IN</h1>
+            <h1>{msg ? msg : null}</h1>
             <form onSubmit={handleLogIn}>
                 <label htmlFor='email'>Email:</label>
                 <input
@@ -99,6 +119,7 @@ export default function Register() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
+                <br />
                 <label htmlFor="password">Password:</label>
                 <input
                     type='password'
@@ -107,6 +128,7 @@ export default function Register() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
+                <br />
                 <button type='submit'>Log in</button>
             </form>
             <button type='button' onClick={loginSignupToggle}>need signup?  Log in</button>
@@ -115,6 +137,7 @@ export default function Register() {
 
     return(
         <div>
+
             {loginSignup ? register : logIn}
         </div>
     )
