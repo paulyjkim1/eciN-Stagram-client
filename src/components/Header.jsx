@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Modal from 'react-modal'
+import { Link } from 'react-router-dom'
 
 import { TiThMenu as Hamburger } from 'react-icons/ti'
 import { BiSearchAlt as Search } from 'react-icons/bi'
@@ -25,13 +26,21 @@ export default function Header() {
         <div>
 
             <div className='header'>
-                <p className='header-logo'>eciN-stagram</p>
-                <div className='header-icon'>eciN</div>
+                <Link to='/' className='Link'>
+                    <p className='header-logo'>eciN-stagram</p>
+                </Link>
+                <Link to='/' className='Link'>
+                    <div className='header-icon'>eciN</div>
+                </Link>
                 <div className='header-links'>
-                    <div className='link'><span className="emoji"><Home /></span> <div className='words'>Home</div></div>
+                    <Link to='/' className='Link'>
+                        <div className='link'><span className="emoji"><Home /></span> <div className='words'>Home</div></div>
+                    </Link>
                     <div className='link'><span className="emoji"><Search /></span> <div className='words'>Search</div></div>
                     <div className='link'><span className="emoji"><Plus /></span> <div className='words'>Create</div></div>
-                    <div className='link'><span className="profile-circle"></span>  <div className='words'>Profile</div></div>
+                    <Link to='/profile' className='Link'>
+                        <div className='link'><span className="profile-circle"></span>  <div className='words'>Profile</div></div>
+                    </Link>
                 </div>
                 <Modal
                     isOpen={hamburger}
@@ -67,7 +76,9 @@ export default function Header() {
                         <div className='ham-modal-item'>Settings</div>
                         <div className='ham-modal-item'>Switch appearance</div>
                         <div className='ham-modal-item'>Report someone</div>
-                        <div className='ham-modal-item'>Switch accounts</div>
+                        <Link to='/register' className='Link'>
+                            <div className='ham-modal-item'>Switch accounts</div>
+                        </Link>
                         <div className='ham-modal-item'>Log out</div>
                     </div>
 
