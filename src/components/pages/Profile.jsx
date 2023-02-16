@@ -4,6 +4,7 @@ import "../../css/Profile.css";
 import axios from 'axios'
 import Modal from 'react-modal'
 import * as toxicity from '@tensorflow-models/toxicity'
+import Header from '../Header'
 
 let modalStyles = {
     content: {
@@ -20,7 +21,7 @@ let modalStyles = {
     }
 }
 
-export default function Profile( { currentUser } ) {
+export default function Profile({currentUser, handleLogout}) {
     const [prof, setProf] = useState([])
     const [postIsOpen, setPostIsOpen] = useState(false)
     const [details, setDetails] = useState([])
@@ -173,6 +174,8 @@ export default function Profile( { currentUser } ) {
     
 
     return (
+        <div className='app'>
+            <Header currentUser={currentUser} handleLogout={handleLogout}/>
         <div className="body">
             <Modal
                 isOpen={postIsOpen}
@@ -231,5 +234,6 @@ export default function Profile( { currentUser } ) {
                 {groupComponent}
             </div>
         </div>
+    </div>
     );
 }
