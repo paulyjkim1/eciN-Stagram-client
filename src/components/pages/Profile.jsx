@@ -46,7 +46,7 @@ export default function Profile({currentUser, handleLogout}) {
         const fetchProfile = async() => {
             try{
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
-                // console.log(response)
+                console.log(response)
                 setProf(response.data)
                 
             }catch(err){
@@ -89,7 +89,9 @@ export default function Profile({currentUser, handleLogout}) {
     
     let postComponent = prof.posts?.map((post, i) => {
         return (
-            <p onClick={() => openPost(i)} className='post' key={i}>{post.image}</p>
+            // console.log(post)
+            <img src={post.image} onClick={() => openPost(i)} className='post' key={i}/>
+            // <p onClick={() => openPost(i)} className='post' key={i}>{post.image}</p>
         )
     })
 

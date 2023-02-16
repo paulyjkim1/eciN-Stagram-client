@@ -51,7 +51,7 @@ export default function Header({ handleLogout, currentUser }) {
     let loggedInHeaderLinks = (
         <>
             <div className='link' onClick={openNewPost}><span className="emoji"><Plus /></span> <div className='words'>Create</div></div>
-            <Link to={`/profile/${currentUser.id}`} className='Link'>
+            <Link to={`/profile/${currentUser?.id}`} className='Link'>
                 <div className='link'><span className="profile-circle"></span>  <div className='words'>Profile</div></div>
             </Link>
         </>
