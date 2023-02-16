@@ -35,7 +35,6 @@ function App() {
   return (
     <div>
       <Router>
-      <Header currentUser={currentUser} handleLogout={handleLogout}/>
         <Routes>
           <Route path="/" element={<Home handleLogout={handleLogout} currentUser={currentUser} />} />
           
