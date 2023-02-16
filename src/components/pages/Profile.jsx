@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import "../../css/Profile.css";
 import axios from 'axios'
 import Modal from 'react-modal'
+import Upload from "../Upload";
 import * as toxicity from '@tensorflow-models/toxicity'
 import Header from '../Header'
 
@@ -45,6 +46,7 @@ export default function Profile({currentUser, handleLogout}) {
         const fetchProfile = async() => {
             try{
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
+                // console.log(response)
                 setProf(response.data)
                 
             }catch(err){
@@ -229,6 +231,7 @@ export default function Profile({currentUser, handleLogout}) {
                 <p className="tab">Saved</p>
                 <p className="tab">Tagged</p>
             </div>
+
             <div className="posts">
                 {/* iterated posts from db */}
                 {groupComponent}
