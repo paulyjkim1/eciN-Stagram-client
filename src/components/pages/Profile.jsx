@@ -26,11 +26,19 @@ export default function Profile( { currentUser } ) {
     const [details, setDetails] = useState([])
     const [comments, setComments] = useState([])
     const [newComment, setNewComment] = useState('')
-    // const [commentComponent, setCommentComponent] = useState([])
-    // let commentComponent = ''
+    const [isToxic, setIsToxic] = useState(null)
 
     let { id } = useParams()
-    
+    const yes = (
+		<>
+			<p>Toxic Comment! Say something nice instead.</p>
+		</>
+	)
+    const no = (
+		<>
+			<p></p>
+		</>
+	)
 
     useEffect(()=> {
         const fetchProfile = async() => {
@@ -47,6 +55,7 @@ export default function Profile( { currentUser } ) {
     // console.log(prof.posts)
 
     const openPost = async(e) => {
+        setIsToxic(null)
         setDetails(prof?.posts[e])
         setPostIsOpen(true)
         const url = `${process.env.REACT_APP_SERVER_URL}/posts/${prof?.posts[e].id}/comments`
@@ -59,6 +68,19 @@ export default function Profile( { currentUser } ) {
         setPostIsOpen(false)
     }
     
+    const handleDeleteClick = async(e) => {
+        try{
+            e.preventDefault()
+            // console.log(comments)
+            // console.log(e.target.parentElement.id)
+            await axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${details?.id}/comments/${e.target.parentElement.id}`)
+            let response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${details.id}/comments`)
+            setComments(response?.data)
+        } catch (err){
+            console.log(err)
+        }
+    }
+
 
     // get post information from database and iterate over
     
@@ -70,11 +92,22 @@ export default function Profile( { currentUser } ) {
 
     
     let commentComponent = comments?.map((comment, i)=> {
-        return(
-            <p className = 'postComment' key={i}>{comment?.content}</p>
-        )
+        if(comment?.userId === currentUser.id){
+            return(
+                <div className = 'postComment' key={i} id={comment.id}>
+                    <p>{comment?.content}</p>
+                    <button onClick={handleDeleteClick}>Delete</button>
+                </div>
+                
+            )
+        } else {
+            return(
+                <div className = 'postComment' key={i}>
+                    <p>{comment?.content}</p>
+                </div>
+            )
+        }
     })
-    // setCommentComponent(commentArray)
     
 
     let grouped = [];
@@ -85,8 +118,6 @@ export default function Profile( { currentUser } ) {
         grouped[j] = grouped[j] || [];
         grouped[j].push(postComponent[i])
     }
-    
-    // console.log(grouped)
 
     const groupComponent = grouped.map((group, i) => {
         return(
@@ -121,6 +152,8 @@ export default function Profile( { currentUser } ) {
             let response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${details.id}/comments`)
             setComments(response?.data)
           } else {
+            setNewComment('')
+            setIsToxic(true)
             console.log(predictions)
           }
     }
@@ -150,6 +183,8 @@ export default function Profile( { currentUser } ) {
                 <div className='modal'>
                     <h1 className='modal-header'>{details?.image}</h1>
                     <p>{details?.caption}</p>
+
+                    <h3>Comments</h3>
                     <div>{commentComponent}</div>
                     <form onSubmit={addComment}>
                         <input 
@@ -161,6 +196,7 @@ export default function Profile( { currentUser } ) {
                         />
                         <button type="submit">Post</button>
                     </form>
+                    {isToxic ? yes : no}
                     <button className='modal-close' onClick={() => closePost()}>X</button>
                 </div>
 
