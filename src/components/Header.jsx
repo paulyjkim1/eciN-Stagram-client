@@ -75,7 +75,7 @@ export default function Header({ handleLogout, currentUser }) {
                     style={modalStyles}
                     ariaHideApp={false}
                 >
-                    <Upload currentUser={currentUser}/>
+                    <Upload currentUser={currentUser} closeNewPost={closeNewPost}/>
                     <button className='modal-close' onClick={() => closeNewPost()}>X</button>
                 </Modal>
                 <Modal
