@@ -34,7 +34,7 @@ function App() {
   return (
     <div className='app'>
       <Router>
-      <Header handleLogout={handleLogout}/>
+      <Header currentUser={currentUser} handleLogout={handleLogout}/>
         <Routes>
           <Route path="/" element={<Home currentUser={currentUser} />} />
           

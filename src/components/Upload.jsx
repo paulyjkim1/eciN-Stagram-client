@@ -2,13 +2,13 @@ import axios from "axios";
 import { React, useState } from "react";
 
 
-export default function Upload(props) {
+export default function Upload({currentUser}) {
     const [caption, setCaption] = useState({
         caption: ''
     })
-    console.log(caption)
+    // console.log(caption)
     const [file, setFile] = useState([null])
-    console.log(file)
+    // console.log(file)
 
     const onInputChange = (e) => {
         setFile(e.target.files[0])
@@ -18,9 +18,14 @@ export default function Upload(props) {
         e.preventDefault()
         
         try {
-            // console.log(props.currentUser.id)
-            const reqbody = { caption, file, userId: props.currentUser._id }
-            const responseData = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, reqbody)  
+            // console.log(currentUser)
+            const formData = new FormData()
+            formData.append('image', file)
+            const options = {
+                "Content-Type": "multipart/form-data"
+            }
+            const reqbody = { caption, userId: currentUser}
+            const responseData = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, reqbody, formData, options)  
             console.log(responseData)
             // after it posts close the modal 
             // code here later
@@ -30,13 +35,13 @@ export default function Upload(props) {
     }
 
     return (
-        <form onSubmit={onSubmit} encType="multipart/form-data">
+        <form onSubmit={onSubmit} encType="multipart/form">
             <div>
                 <label>Create new post</label>
                 <input
                     type="file"
                     id="image"
-                    onChange={onInputChange}
+                    onChange={e => setFile(e.target.files[0])}
                     />
                 <textarea 
                     id="caption"

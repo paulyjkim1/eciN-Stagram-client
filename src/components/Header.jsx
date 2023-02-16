@@ -27,7 +27,7 @@ let modalStyles = {
 }
 
 
-export default function Header({ handleLogout }) {
+export default function Header({ handleLogout, currentUser }) {
 
     let [hamburger, setHamburger] = useState(false)
     
@@ -75,7 +75,7 @@ export default function Header({ handleLogout }) {
                     style={modalStyles}
                     ariaHideApp={false}
                 >
-                    <Upload />
+                    <Upload currentUser={currentUser}/>
                     <button className='modal-close' onClick={() => closeNewPost()}>X</button>
                 </Modal>
                 <Modal
