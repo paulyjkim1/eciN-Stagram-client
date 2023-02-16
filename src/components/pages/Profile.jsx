@@ -26,9 +26,11 @@ export default function Profile( { currentUser } ) {
     const [details, setDetails] = useState([])
     const [comments, setComments] = useState([])
     const [newComment, setNewComment] = useState('')
-
+    // const [commentComponent, setCommentComponent] = useState([])
+    // let commentComponent = ''
 
     let { id } = useParams()
+    
 
     useEffect(()=> {
         const fetchProfile = async() => {
@@ -59,18 +61,22 @@ export default function Profile( { currentUser } ) {
     
 
     // get post information from database and iterate over
-    const postComponent = prof.posts?.map((post, i) => {
+    
+    let postComponent = prof.posts?.map((post, i) => {
         return (
             <p onClick={() => openPost(i)} className='post' key={i}>{post.image}</p>
         )
     })
-    const commentComponent = comments?.map((comment, i)=> {
+
+    
+    let commentComponent = comments?.map((comment, i)=> {
         return(
             <p className = 'postComment' key={i}>{comment?.content}</p>
         )
     })
+    // setCommentComponent(commentArray)
+    
 
-  
     let grouped = [];
     let n = 3
     for (let i = 0, j = 0; i < postComponent?.length; i++) {
@@ -92,6 +98,7 @@ export default function Profile( { currentUser } ) {
 
 
     function handleChange(e){
+        e.preventDefault()
         setNewComment(e.target.value)
     }
 
@@ -102,15 +109,19 @@ export default function Profile( { currentUser } ) {
         const predictions = await classify(model, text)
         if (predictions.length == 0) {
             console.log('not toxic')
-            console.log(currentUser)
-            const reqbody = {
-                userId: currentUser,
+            // console.log(currentUser)
+            const reqBody = {
+                userId: currentUser.id,
                 postId: details.id,
                 content: text,
             }
+            console.log(reqBody)
+            setNewComment('')
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${details.id}/comments`, reqBody)
+            let response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${details.id}/comments`)
+            setComments(response?.data)
           } else {
             console.log(predictions)
-            
           }
     }
 
