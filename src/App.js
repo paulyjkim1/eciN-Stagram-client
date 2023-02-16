@@ -23,7 +23,8 @@ function App() {
     }
   }, [])
 
-  let handleLogout = () => {
+  let handleLogout = (e) => {
+    e.preventDefault()
     console.log('loggin out')
     if (localStorage.getItem('jwt')) {
       localStorage.removeItem('jwt')
