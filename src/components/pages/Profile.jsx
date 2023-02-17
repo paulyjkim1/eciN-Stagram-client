@@ -144,6 +144,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
         const predictions = await classify(model, text)
         if (predictions.length == 0) {
             console.log('not toxic')
+            setIsToxic(null)
             // console.log(currentUser)
             const reqBody = {
                 userId: currentUser.id,
@@ -178,7 +179,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
 
     return (
         <div className='app'>
-            <Header currentUser={currentUser} handleLogout={handleLogout}/>
+            <Header currentUser={currentUser} handleLogout={handleLogout} prof={prof} setProf={setProf}/>
         <div className="body">
             <Modal
                 isOpen={postIsOpen}
