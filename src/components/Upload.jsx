@@ -1,10 +1,13 @@
 import axios from "axios";
 import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
-export default function Upload({currentUser, closeNewPost}) {
+export default function Upload({currentUser, closeNewPost, setProf}) {
     const [formImg, setFormImg] = useState('')
     const [caption, setCaption] = useState('')
+
+    const navigate = useNavigate()
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -22,6 +25,10 @@ export default function Upload({currentUser, closeNewPost}) {
             }
             const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/images`, formData, options)
             // // console.log(data)
+            // navigate(`/profile/${currentUser?.id}`)
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${currentUser?.id}`)
+            console.log(response.data)
+            setProf(response.data)
         } catch (err) {
             console.log(err)
         }
