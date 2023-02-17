@@ -199,6 +199,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                         <form onSubmit={addComment}>
                             <input 
                                 className='modal-input'
+                                autoComplete = 'off'
                                 name='newComment'
                                 placeholder='New Comment'
                                 onChange={handleChange}
