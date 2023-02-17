@@ -13,7 +13,7 @@ import './css/App.css';
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [prof, setProf] = useState([])
-
+  // console.log(prof)
   useEffect(() => {
     const token = localStorage.getItem('jwt')
     if (token) {

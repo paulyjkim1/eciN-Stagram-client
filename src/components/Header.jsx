@@ -28,7 +28,7 @@ let modalStyles = {
 
 
 export default function Header({ handleLogout, currentUser, prof, setProf }) {
-
+    // console.log(prof)
     let [hamburger, setHamburger] = useState(false)
     
     const [newPostIsOpen, setNewPostIsOpen] = useState(false)
@@ -84,15 +84,15 @@ export default function Header({ handleLogout, currentUser, prof, setProf }) {
                    
                     
                 </div>
-                <Modal
+                <Upload currentUser={currentUser} 
+                    closeNewPost={closeNewPost} 
+                    prof={prof} 
+                    setProf={setProf} 
                     isOpen={newPostIsOpen}
                     onRequestClose={closeNewPost}
                     style={modalStyles}
                     ariaHideApp={false}
-                >
-                    <Upload currentUser={currentUser} closeNewPost={closeNewPost} prof={prof} setProf={setProf}/>
-                    <button className='modal-close' onClick={() => closeNewPost()}>X</button>
-                </Modal>
+                />
                 <Modal
                     isOpen={hamburger}
                     onRequestClose={hamburgerClose}

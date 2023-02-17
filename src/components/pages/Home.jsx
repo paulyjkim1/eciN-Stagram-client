@@ -6,7 +6,7 @@ import Footer from '../Footer'
 
 
 export default function Home( { handleLogout, currentUser, prof, setProf} ) {
-
+    // console.log(prof)
     if (!currentUser) {
         return <Navigate to='/register' />
     }

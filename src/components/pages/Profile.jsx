@@ -178,7 +178,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
 
     return (
         <div className='app'>
-            <Header currentUser={currentUser} handleLogout={handleLogout}/>
+            <Header currentUser={currentUser} handleLogout={handleLogout} prof={prof} setProf={setProf}/>
         <div className="body">
             <Modal
                 isOpen={postIsOpen}

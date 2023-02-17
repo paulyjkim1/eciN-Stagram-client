@@ -1,14 +1,15 @@
 import axios from "axios";
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Modal from 'react-modal'
 
 
-export default function Upload({currentUser, closeNewPost, setProf}) {
+export default function Upload({currentUser, closeNewPost, prof, setProf, isOpen, style, ariaHideApp}) {
     const [formImg, setFormImg] = useState('')
     const [caption, setCaption] = useState('')
 
     const navigate = useNavigate()
-
+    // console.log(prof)
     const handleSubmit = async e => {
         e.preventDefault()
         try {
@@ -35,24 +36,32 @@ export default function Upload({currentUser, closeNewPost, setProf}) {
     }
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            encType='multipart/form'
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={closeNewPost}
+            style={style}
+            ariaHideApp={ariaHideApp}
         >
-            <div>
-                <input
-                    type='file'
-                    id='image-upload'
-                    onChange={e => setFormImg(e.target.files[0])}
-                ></input>
-            </div>
-            <textarea 
-                id="caption"
-                value={caption}
-                onChange={e => setCaption(e.target.value)}
+            <form
+                onSubmit={handleSubmit}
+                encType='multipart/form'
             >
-            </textarea>
-            <input type="submit" />
-        </form>
+                <div>
+                    <input
+                        type='file'
+                        id='image-upload'
+                        onChange={e => setFormImg(e.target.files[0])}
+                    ></input>
+                </div>
+                <textarea 
+                    id="caption"
+                    value={caption}
+                    onChange={e => setCaption(e.target.value)}
+                >
+                </textarea>
+                <input type="submit" />
+            </form>
+            <button className='modal-close' onClick={() => closeNewPost()}>X</button>
+        </Modal>
     )
 }
