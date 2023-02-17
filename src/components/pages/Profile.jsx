@@ -22,8 +22,7 @@ let modalStyles = {
     }
 }
 
-export default function Profile({currentUser, handleLogout}) {
-    const [prof, setProf] = useState([])
+export default function Profile({currentUser, handleLogout, prof, setProf}) {
     const [postIsOpen, setPostIsOpen] = useState(false)
     const [details, setDetails] = useState([])
     const [comments, setComments] = useState([])
@@ -187,24 +186,28 @@ export default function Profile({currentUser, handleLogout}) {
                 style={modalStyles}
                 ariaHideApp={false}
             >
-                <div className='modal'>
-                    <h1 className='modal-header'>{details?.image}</h1>
-                    <p>{details?.caption}</p>
-
-                    <h3>Comments</h3>
-                    <div>{commentComponent}</div>
-                    <form onSubmit={addComment}>
-                        <input 
-                            className='modal-input'
-                            name='newComment'
-                            placeholder='New Comment'
-                            onChange={handleChange}
-                            value={newComment}
-                        />
-                        <button type="submit">Post</button>
-                    </form>
-                    {isToxic ? yes : no}
-                    <button className='modal-close' onClick={() => closePost()}>X</button>
+                <div className='post-modal'>
+                    {/* <h1 className='modal-header'>{details?.image}</h1> */}
+                    <div className='image-div'>
+                        <img src={details?.image} className='modal-image'/>
+                    </div>
+                    <div className="post-content">
+                        <p>{details?.caption}</p>
+                        <h3>Comments</h3>
+                        <div>{commentComponent}</div>
+                        <form onSubmit={addComment}>
+                            <input 
+                                className='modal-input'
+                                name='newComment'
+                                placeholder='New Comment'
+                                onChange={handleChange}
+                                value={newComment}
+                            />
+                            <button type="submit">Post</button>
+                        </form>
+                        {isToxic ? yes : no}
+                        <button className='modal-close' onClick={() => closePost()}>X</button>
+                    </div>
                 </div>
 
             </Modal>

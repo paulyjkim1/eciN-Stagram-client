@@ -12,6 +12,7 @@ import './css/App.css';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
+  const [prof, setProf] = useState([])
 
   useEffect(() => {
     const token = localStorage.getItem('jwt')
@@ -36,9 +37,9 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<Home handleLogout={handleLogout} currentUser={currentUser} />} />
+          <Route path="/" element={<Home handleLogout={handleLogout} currentUser={currentUser} prof={prof} setProf={setProf} />} />
           
-          <Route path="/profile/:id" element={<Profile currentUser={currentUser} handleLogout={handleLogout} />} />
+          <Route path="/profile/:id" element={<Profile currentUser={currentUser} handleLogout={handleLogout} prof={prof} setProf={setProf} />} />
 
           <Route path="/register" element={<Register currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
         </Routes>

@@ -5,7 +5,7 @@ import Footer from '../Footer'
 
 
 
-export default function Home( { handleLogout, currentUser } ) {
+export default function Home( { handleLogout, currentUser, prof, setProf} ) {
 
     if (!currentUser) {
         return <Navigate to='/register' />
@@ -14,7 +14,7 @@ export default function Home( { handleLogout, currentUser } ) {
     // console.log(csrftoken)
     return (
         <div className='app'>
-            <Header currentUser={currentUser} handleLogout={handleLogout} />
+            <Header currentUser={currentUser} handleLogout={handleLogout} prof={prof} setProf={setProf} />
         <div className='home'>
             <h1></h1>
         </div>
