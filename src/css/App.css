@@ -1,5 +1,6 @@
 .app{
   display: flex;
+  background-color: black;
   justify-content: space-between;
   height: 100vh;
   width: 100vw;
@@ -7,7 +8,7 @@
 .header {
   display: flex;
   margin-left: 0;
-  color: white;
+  color: hotpink;
   background-color: black;
   font-size: 30px;
   flex-direction: column;
@@ -34,6 +35,7 @@
   cursor: pointer;
 }
 .header-icon:hover {
+  color: white;
   background-color: rgb(19, 19, 19);
 }
 .header-logo {
@@ -57,7 +59,7 @@
 .link{
   display:flex;
   align-items: center;
-  color: white;
+  color: hotpink;
   background-color: black;
   border: 1px solid black;
   text-align: left;
@@ -87,6 +89,7 @@
   margin-left: 10px;
 }
 .link:hover{
+  color: white;
   background-color: rgb(19, 19, 19);
   transition-duration: 200ms;
   cursor: pointer;
@@ -98,16 +101,19 @@
   width: 22px;
   height: 22px;
   border-radius: 20px;
-  border: 1px solid white;
+  border: 1px solid hotpink;
   margin-left: 13px;
   margin-top: 4px;
   transform: translateY(-2px)
+}
+.profile-circle:hover {
+  color: white;
 }
 .header2 {
   display: none;
   height: 60px;
   font-size: 22px;
-  color: white;
+  color: hotpink;
   align-items: center;
   margin-left: 0px;
   background-color: black;
@@ -144,7 +150,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: hotpink;
   border-left: 1px solid rgb(33, 33, 33);
   background-color: rgb(0, 0, 0);
   width: 100%;
@@ -152,7 +158,7 @@
 }
 .footer {
   display: flex;
-  color: white;
+  color: hotpink;
   width: 370px; height: 100%;
   background-color: rgb(0, 0, 0);
 
@@ -168,6 +174,40 @@
 }
 .plus {
   transform: translateY(3px);
+}
+
+
+.homepost{
+  display: block;
+  position: relative;
+  height: 550px;
+  width: 500px;
+  background-color: hotpink;
+  border: 4px solid rgb(33, 33, 33);
+}
+.homeImage{
+  margin-top: 40px; margin-bottom: -2px;
+  height: 500px;
+  width: 500px;
+}
+.poster{
+  position:  absolute;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  top: -2%;
+  left: 60%;
+}
+.caption{
+  position: absolute;
+  font-size: 30px;
+  color: white;
+  top: -5%;
+  left: 30%;
+}
+.poster:hover {
+  color: blue;
+  transition-duration: 200ms;
 }
 
 

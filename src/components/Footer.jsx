@@ -21,12 +21,14 @@ export default function Footer() {
 
         <div>
             <div className='footer'>
-                <h1>Brought to you by:</h1>
-                <a href='https://www.linkedin.com/in/parkfamily/' target='_blank'>Daniel Park</a>
-                <a href='https://www.linkedin.com/in/derek-haleswdev/' target='_blank'>Derek Hale</a>
-                <a href='https://www.linkedin.com/in/paulyoungjinkim/' target='_blank'>Paul Kim</a>
-                <a href='https://www.linkedin.com/in/tbfrobinson/' target='_blank'>Theo Robinson</a>
-                <a href='' target='_blank'>Cookie Policy</a>
+                <div className='broughtby'>
+                    <h1>Brought to you by:</h1>
+                    <a className='footerLinks' href='https://www.linkedin.com/in/parkfamily/' target='_blank'>Daniel Park</a>
+                    <a className='footerLinks' href='https://www.linkedin.com/in/derek-haleswdev/' target='_blank'>Derek Hale</a>
+                    <a className='footerLinks' href='https://www.linkedin.com/in/paulyoungjinkim/' target='_blank'>Paul Kim</a>
+                    <a className='footerLinks' href='https://www.linkedin.com/in/tbfrobinson/' target='_blank'>Theo Robinson</a>
+                    <a className='footerLinks' href='' target='_blank'>Cookie Policy</a>
+                </div>
             </div>
 
 
