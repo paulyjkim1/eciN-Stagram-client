@@ -20,5 +20,9 @@
 
 .Link {
     text-decoration: none;
+    color: hotpink;
+}
+.Link:hover {
     color: white;
+    transition-duration: 600ms;
 }
