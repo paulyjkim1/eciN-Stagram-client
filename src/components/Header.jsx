@@ -59,7 +59,7 @@ export default function Header({ handleLogout, currentUser, prof, setProf }) {
     let loggedInHamburgerItems =(
         <>
             <Link to='/register' className='Link'>
-            <div className='ham-modal-item'>Switch accounts</div>
+            <div className='ham-modal-item' onClick={handleLogout}>Switch accounts</div>
             </Link>
             <div className='ham-modal-item' onClick={handleLogout}>Log out</div>
         </>
