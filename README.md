@@ -28,9 +28,9 @@ eciN-stagram is a social media app mockup of the fourth most popular social medi
 - As a user, I would like all comments that are created and edited to disallow any toxic content.
 
 ## MVP
-- Create, Read, Delete posts on my profile
-- Search for another user and read their posts
-- Create, Read, Update, Delete comments.
+- Create, Read  posts on my profile
+- See other users and read their posts
+- Create, Read, Delete comments.
 - Do not allow users to post toxic comments.
 
 

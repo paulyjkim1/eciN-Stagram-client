@@ -34,7 +34,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='app'>
       <Router>
         <Routes>
           <Route path="/" element={<Home handleLogout={handleLogout} currentUser={currentUser} prof={prof} setProf={setProf} />} />

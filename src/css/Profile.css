@@ -1,10 +1,8 @@
 .body {
     background-color: hotpink;
-    width: 100%;
-    max-width: 935px;
+    width: 100%; height: 100%;
     margin: 0 auto 30px;
     padding: 30px 10px 0;
-    max-width: 935px;
 }
 
 .user-info {

@@ -144,6 +144,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
         const predictions = await classify(model, text)
         if (predictions.length == 0) {
             console.log('not toxic')
+            setIsToxic(null)
             // console.log(currentUser)
             const reqBody = {
                 userId: currentUser.id,
@@ -198,6 +199,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                         <form onSubmit={addComment}>
                             <input 
                                 className='modal-input'
+                                autoComplete = 'off'
                                 name='newComment'
                                 placeholder='New Comment'
                                 onChange={handleChange}
