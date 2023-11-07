@@ -12,6 +12,7 @@ export default function Home( { handleLogout, currentUser, prof, setProf} ) {
     async function getPosts() {
         try {
             let response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts`)
+            console.log(response)
             setPosts(response.data)
             console.log(posts)
         } catch(err) {
@@ -21,6 +22,7 @@ export default function Home( { handleLogout, currentUser, prof, setProf} ) {
     useEffect(() => {
         getPosts()
     }, [])
+
     if (!currentUser) {
         return <Navigate to='/register' />
     }

@@ -28,6 +28,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
     const [comments, setComments] = useState([])
     const [newComment, setNewComment] = useState('')
     const [isToxic, setIsToxic] = useState(null)
+    const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
 
     let { id } = useParams()
     const yes = (
@@ -139,6 +140,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
 
     const addComment= async(e) => {
         e.preventDefault()
+        setIsSubmitButtonDisabled(true); 
         const model = await toxicity.load(0.8)
         const text = newComment
         const predictions = await classify(model, text)
@@ -154,12 +156,14 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
             console.log(reqBody)
             setNewComment('')
             await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${details.id}/comments`, reqBody)
+            setIsSubmitButtonDisabled(false);
             let response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${details.id}/comments`)
             setComments(response?.data)
           } else {
             setNewComment('')
             setIsToxic(true)
             console.log(predictions)
+            setIsSubmitButtonDisabled(false);
           }
     }
 
@@ -205,7 +209,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                                 onChange={handleChange}
                                 value={newComment}
                             />
-                            <button type="submit">Post</button>
+                            <button type="submit" disabled={isSubmitButtonDisabled}>Post</button>
                         </form>
                         {isToxic ? yes : no}
                         <button className='modal-close' onClick={() => closePost()}>X</button>

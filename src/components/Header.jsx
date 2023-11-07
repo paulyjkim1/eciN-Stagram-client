@@ -68,7 +68,7 @@ export default function Header({ handleLogout, currentUser, prof, setProf }) {
     return(
         <div>
 
-            <div className='header'>
+            <div className='header' style={{ position: 'fixed', top: 0}}>
                 <Link to='/' className='Link'>
                     <p className='header-logo'>eciN-stagram</p>
                 </Link>
