@@ -42,7 +42,7 @@ export default function Home( { handleLogout, currentUser, prof, setProf} ) {
     return (
         <div className='app'>
             <Header currentUser={currentUser} handleLogout={handleLogout} prof={prof} setProf={setProf} />
-        <div className='home'>
+        <div className='home' style = {{backgroundColor: 'black'}}>
             {generatePosts}
         </div>
             <Footer />
