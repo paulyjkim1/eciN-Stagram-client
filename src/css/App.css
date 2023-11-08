@@ -229,7 +229,7 @@
   .header {display: none;}
   .header2 {display: flex;}
   .app {flex-direction: column;}
-  .footer2 {display: flex;}
+  .footer2 {display: flex; z-index: 100}
 }
 @media screen and (max-width: 634px) {
   .logo {

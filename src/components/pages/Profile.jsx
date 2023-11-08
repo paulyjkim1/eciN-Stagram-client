@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react";
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import "../../css/Profile.css";
 import axios from 'axios'
 import Modal from 'react-modal'
@@ -22,6 +22,7 @@ let modalStyles = {
     }
 }
 
+
 export default function Profile({currentUser, handleLogout, prof, setProf}) {
     const [postIsOpen, setPostIsOpen] = useState(false)
     const [details, setDetails] = useState([])
@@ -29,6 +30,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
     const [newComment, setNewComment] = useState('')
     const [isToxic, setIsToxic] = useState(null)
     const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
+    const navigate = useNavigate()
 
     let { id } = useParams()
     const yes = (
@@ -71,6 +73,22 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
         setPostIsOpen(false)
     }
     
+    const handlePostDelete = async(e) => {
+        try{
+            e.preventDefault()
+            setPostIsOpen(false)
+            setProf((prevProf) => {
+                const updatedPosts = prevProf.posts.filter((post) => post.id !== details?.id);
+                return { ...prevProf, posts: updatedPosts };
+            });
+            await axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${details?.id}`)
+            console.log(id)
+            navigate(`/profile/${id}`)
+        } catch (err){
+            console.log(err)
+        }
+    }
+
     const handleDeleteClick = async(e) => {
         try{
             e.preventDefault()
@@ -212,6 +230,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                             <button type="submit" disabled={isSubmitButtonDisabled}>Post</button>
                         </form>
                         {isToxic ? yes : no}
+                        <button onClick={handlePostDelete}>Delete Post</button>
                         <button className='modal-close' onClick={() => closePost()}>X</button>
                     </div>
                 </div>
