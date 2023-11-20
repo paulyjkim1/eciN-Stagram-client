@@ -219,7 +219,7 @@
 
 
 
-@media screen and (max-width: 1265px) {
+@media screen and (max-width: 1340px) {
   .header-icon {display: flex;}
   .header {width: 50px; align-items: start;}
   .emoji{font-size: 26px; margin-left: 8px; margin-top: 2px;}
@@ -229,7 +229,7 @@
   .header-logo {display: none;}
   .words {display: none;}
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1050px) {
   .footer {display: none;}
 }
 @media screen and (max-width: 770px) {
