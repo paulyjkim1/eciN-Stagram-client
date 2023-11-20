@@ -4,6 +4,7 @@
   justify-content: space-between;
   height: 100vh;
   width: 100vw;
+  overflow-y: auto;
 }
 .header {
   display: flex;
@@ -16,6 +17,7 @@
   height: 100vh;
   width: 210px;
   text-decoration: none;
+  position: fixed;
 }
 .header-icon {
   display: none;

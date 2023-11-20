@@ -1,7 +1,7 @@
 .body {
     background-color: hotpink;
     width: 100vw; height: 100vh;
-    margin: 0 0 0 50px;
+    margin: 0 auto;
     padding: 30px 10px 0;
 }
 
