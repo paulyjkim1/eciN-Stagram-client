@@ -216,7 +216,9 @@
   color: blue;
   transition-duration: 200ms;
 }
-
+.profile {
+  margin: 0 0 0 210px
+}
 
 
 @media screen and (max-width: 1340px) {
