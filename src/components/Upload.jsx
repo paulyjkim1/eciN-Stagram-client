@@ -7,7 +7,7 @@ import Modal from 'react-modal'
 export default function Upload({currentUser, closeNewPost, prof, setProf, isOpen, style, ariaHideApp}) {
     const [formImg, setFormImg] = useState('')
     const [caption, setCaption] = useState('')
-    let id = currentUser.id
+    let id = currentUser?.id
     const navigate = useNavigate()
     // console.log(prof)
     const handleSubmit = async e => {
