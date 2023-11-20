@@ -16,9 +16,12 @@ let modalStyles = {
         width: '80%',
         margin: 'auto',
         height: '80%',
+        zIndex: 101,
+    
     },
     overlay:{
-        backgroundColor: 'rgba(255,255,255,.2)'
+        backgroundColor: 'rgba(255,255,255,.2)',
+        zIndex: 101,
     }
 }
 
@@ -202,7 +205,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
     return (
         <div className='app'>
             <Header currentUser={currentUser} handleLogout={handleLogout} prof={prof} setProf={setProf}/>
-        <div className="body">
+        <div className="profile">
             <Modal
                 isOpen={postIsOpen}
                 onRequestClose={closePost}

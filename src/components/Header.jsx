@@ -20,9 +20,11 @@ let modalStyles = {
         width: '80%',
         margin: 'auto',
         height: '80%',
+
     },
     overlay:{
-        backgroundColor: 'rgba(255,255,255,.2)'
+        backgroundColor: 'rgba(255,255,255,.2)',
+        zIndex: 101
     }
 }
 
