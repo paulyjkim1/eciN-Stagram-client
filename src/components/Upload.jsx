@@ -1,13 +1,13 @@
 import axios from "axios";
 import { React, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import Modal from 'react-modal'
 
 
 export default function Upload({currentUser, closeNewPost, prof, setProf, isOpen, style, ariaHideApp}) {
     const [formImg, setFormImg] = useState('')
     const [caption, setCaption] = useState('')
-
+    let id = currentUser.id
     const navigate = useNavigate()
     // console.log(prof)
     const handleSubmit = async e => {
@@ -30,6 +30,7 @@ export default function Upload({currentUser, closeNewPost, prof, setProf, isOpen
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${currentUser?.id}`)
             console.log(response.data)
             setProf(response.data)
+            navigate(`/profile/${id}`)
         } catch (err) {
             console.log(err)
         }
