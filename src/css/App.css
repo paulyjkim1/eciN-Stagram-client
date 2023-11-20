@@ -228,6 +228,7 @@
   .plus {margin-left: -2px;}
   .header-logo {display: none;}
   .words {display: none;}
+  .profile {margin: 0 0 0 50px}
 }
 @media screen and (max-width: 1050px) {
   .footer {display: none;}
@@ -237,6 +238,7 @@
   .header2 {display: flex;}
   .app {flex-direction: column;}
   .footer2 {display: flex; z-index: 100}
+  .profile {margin: 0 auto}
 }
 @media screen and (max-width: 634px) {
   .logo {
