@@ -30,14 +30,6 @@ export default function Footer() {
                     <a className='footerLinks' href='' target='_blank'>Cookie Policy</a>
                 </div>
             </div>
-
-
-            <div className='footer2'>
-                <div className='icons'><div className='footer-icon'><Home /></div></div>
-                <div className='icons'><div className='footer-icon'><Search /></div></div>
-                <div className='icons'><div className='footer-icon'><Plus /></div></div>
-                <div className='icons'><div className='footer-icon'><div className="footer-circle"></div></div></div>
-            </div>
         </div>
     )
 }

@@ -6,6 +6,7 @@ import Modal from 'react-modal'
 import Upload from "../Upload";
 import * as toxicity from '@tensorflow-models/toxicity'
 import Header from '../Header'
+import Footer2 from '../Footer2'
 
 let modalStyles = {
     content: {
@@ -269,7 +270,12 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                 {/* iterated posts from db */}
                 {groupComponent}
             </div>
+
         </div>
+        <div>
+            <Footer2 />
+        </div>
+        
     </div>
     );
 }

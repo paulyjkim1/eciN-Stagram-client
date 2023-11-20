@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import Header from '../Header'
 import Footer from '../Footer'
+import Footer2 from '../Footer2'
 import axios from 'axios'
 
 
@@ -42,10 +43,12 @@ export default function Home( { handleLogout, currentUser, prof, setProf} ) {
     return (
         <div className='app'>
             <Header currentUser={currentUser} handleLogout={handleLogout} prof={prof} setProf={setProf} />
-        <div className='home' style = {{backgroundColor: 'black', minHeight: '100vh'}}>
-            {generatePosts}
-        </div>
+            <div className='home' style = {{backgroundColor: 'black', minHeight: '100vh'}}>
+                {generatePosts}
+            </div>
             <Footer />
+            <Footer2 />
         </div>
+        
     );
 }
