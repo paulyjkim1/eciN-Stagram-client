@@ -104,11 +104,11 @@ export default function Register({ currentUser, setCurrentUser }) {
                 <br />
                 <button type='submit'>Register</button>
             </form>
-            <button type='button' onClick={loginSignupToggle}>Already have an account? Log in</button>
+            <button className='haveAccount'type='button' onClick={loginSignupToggle}>Already have an account? Log in</button>
         </div>
     )
     let logIn = (
-        <div>
+        <div className="login">
             <h1 className='loginTitle'>LOG IN</h1>
             <h1>{msg ? msg : null}</h1>
             <form onSubmit={handleLogIn}>

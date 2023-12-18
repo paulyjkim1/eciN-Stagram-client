@@ -1,12 +1,29 @@
 .register{
     background-color: hotpink;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+
+}
+.login{
+    background-color: hotpink;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+.login:hover {
+    background-color: hotpink;
+  }
+
+.haveAccount{
+    width:225.73px
 }
 
-registerTitle{
+.registerTitle{
     color: black;
     text-align: center;
 }

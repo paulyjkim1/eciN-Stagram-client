@@ -37,6 +37,8 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
     const navigate = useNavigate()
 
     let { id } = useParams()
+    let isCurrentUserPage = currentUser?.id === prof?.id
+
     const yes = (
 		<>
 			<p>Toxic Comment! Say something nice instead.</p>
@@ -136,24 +138,40 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
         }
     })
     
+    // console.log(postComponent)
+    // let grouped = [];
+    // let n = 3
+    // for (let i = 0, j = 0; i < postComponent?.length; i++) {
+    //     if (i >= n && i % n === 0)
+    //         j++;
+    //     grouped[j] = grouped[j] || [];
+    //     grouped[j].push(postComponent[i])
+    // }
 
+    // const groupComponent = grouped.map((group, i) => {
+    //     return(
+    //         <div className='post-row' key={i}>
+    //             {group}
+    //         </div>
+    //     )
+    // })
     let grouped = [];
-    let n = 3
-    for (let i = 0, j = 0; i < postComponent?.length; i++) {
-        if (i >= n && i % n === 0)
-            j++;
-        grouped[j] = grouped[j] || [];
-        grouped[j].push(postComponent[i])
+    let n = 3;
+
+    // Reverse the order of posts
+    const reversedPosts = postComponent?.slice().reverse();
+
+    // Group posts in rows of 3
+    for (let i = 0; i < reversedPosts?.length; i += n) {
+    grouped.push(reversedPosts?.slice(i, i + n));
     }
 
-    const groupComponent = grouped.map((group, i) => {
-        return(
-            <div className='post-row' key={i}>
-                {group}
-            </div>
-        )
-    })
-
+    const groupComponent = grouped.map((group, i) => (
+    <div className='post-row' key={i}>
+        {group}
+    </div>
+    ));
+    
 
     function handleChange(e){
         e.preventDefault()
@@ -245,11 +263,16 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                 {/* username */}
                 <section>
                     <div className="user-setting">
-                        <p>hello i am {prof.username}</p>
+                        <div classname="user-setting-username">
+                            <h1>{prof.username}</h1>
+                        </div>
+                        {!isCurrentUserPage && (
+                        <div className="user-setting-buttons">
+                            <button>Follow</button>
+                        </div>
+                        )}
+                        
                         {/* conditional render the items below*/}
-                        <button>Edit profile</button>
-                        <button>Follow</button>
-                        <button>Message</button>
                     </div>
                     <div className="user-post">
                         <p className="tab">0 posts</p>

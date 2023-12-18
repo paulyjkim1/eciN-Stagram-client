@@ -14,8 +14,17 @@
 
 .user-setting {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.user-setting-buttons {
+    padding: 10px
+}
+
+.user-setting-username{
+    margin: -10px
 }
 
 .user-post {
@@ -47,6 +56,7 @@
 
 .post-row {
     display: flex;
+    justify-content: flex-start;
     flex-direction: row;
     align-items: center;
     position: relative;
