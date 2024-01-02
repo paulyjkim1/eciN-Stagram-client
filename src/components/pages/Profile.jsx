@@ -237,7 +237,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                         <img src={details?.image} className='modal-image'/>
                     </div>
                     <div className="post-content">
-                        <p>{details?.caption}</p>
+                        <div className='post-caption'>{details?.caption}</div>
                         <h3>Comments</h3>
                         <div>{commentComponent}</div>
                         <form onSubmit={addComment}>
@@ -252,7 +252,8 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                             <button type="submit" disabled={isSubmitButtonDisabled}>Post</button>
                         </form>
                         {isToxic ? yes : no}
-                        <button onClick={handlePostDelete}>Delete Post</button>
+                        {isCurrentUserPage && (<button onClick={handlePostDelete}>Delete Post</button>)}
+                    
                         <button className='modal-close' onClick={() => closePost()}>X</button>
                     </div>
                 </div>
@@ -263,7 +264,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                 {/* username */}
                 <section>
                     <div className="user-setting">
-                        <div classname="user-setting-username">
+                        <div className="user-setting-username">
                             <h1>{prof.username}</h1>
                         </div>
                         {!isCurrentUserPage && (

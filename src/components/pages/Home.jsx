@@ -33,7 +33,7 @@ export default function Home( { handleLogout, currentUser, prof, setProf} ) {
             <div className='homepost' key={`post ${i}`}>
                 <img className='homeImage' src={post.image} alt={post.caption}/>    
                 <div className='postandcap'>
-                    <p className='caption'>
+                    <p className='home-post-caption'>
                         <Link to={`/profile/${post.user.id}`} className='caplink'>{post.user.username}
                         </Link>
                         &nbsp;

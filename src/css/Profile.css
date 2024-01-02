@@ -69,3 +69,11 @@
     height: 10em;
     margin: 5px;
 }
+
+.post-content{
+    width: 40%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
