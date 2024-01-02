@@ -33,7 +33,8 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
     const [comments, setComments] = useState([])
     const [newComment, setNewComment] = useState('')
     const [isToxic, setIsToxic] = useState(null)
-    const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
+    const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false)
+    const [isAnalyzing, setIsAnalyzing] = useState(false)
     const navigate = useNavigate()
 
     let { id } = useParams()
@@ -66,6 +67,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
     // console.log(prof.posts)
 
     const openPost = async(e) => {
+        setIsAnalyzing(false)
         setIsToxic(null)
         setDetails(prof?.posts[e])
         setPostIsOpen(true)
@@ -181,6 +183,8 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
     const addComment= async(e) => {
         e.preventDefault()
         setIsSubmitButtonDisabled(true); 
+        setIsAnalyzing(true)
+        console.log(isAnalyzing)
         const model = await toxicity.load(0.8)
         const text = newComment
         const predictions = await classify(model, text)
@@ -197,10 +201,13 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
             setNewComment('')
             await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts/${details.id}/comments`, reqBody)
             setIsSubmitButtonDisabled(false);
+            setIsAnalyzing(false)
+            console.log(isAnalyzing)
             let response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${details.id}/comments`)
             setComments(response?.data)
           } else {
             setNewComment('')
+            setIsAnalyzing(false)
             setIsToxic(true)
             console.log(predictions)
             setIsSubmitButtonDisabled(false);
@@ -250,6 +257,7 @@ export default function Profile({currentUser, handleLogout, prof, setProf}) {
                                 value={newComment}
                             />
                             <button type="submit" disabled={isSubmitButtonDisabled}>Post</button>
+                            {isAnalyzing && (<p className='is-analyzing'>Determining comment toxicity... please be patient</p>)}
                         </form>
                         {isToxic ? yes : no}
                         {isCurrentUserPage && (<button onClick={handlePostDelete}>Delete Post</button>)}
