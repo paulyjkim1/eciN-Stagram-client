@@ -31,11 +31,16 @@ export default function Home( { handleLogout, currentUser, prof, setProf} ) {
     let generatePosts = posts.map((post, i) => {
         return (
             <div className='homepost' key={`post ${i}`}>
-                <Link to={`/profile/${post.user.id}`}>
-                <p className='poster'>By {post.user.username}</p>
-                </Link>
-                <p className='caption'>{post.caption}</p>
-                <img className='homeImage' src={post.image} alt={post.caption}/>
+                <img className='homeImage' src={post.image} alt={post.caption}/>    
+                <div className='postandcap'>
+                    <p className='caption'>
+                        <Link to={`/profile/${post.user.id}`} className='caplink'>{post.user.username}
+                        </Link>
+                        &nbsp;
+                        &nbsp;
+                        {post.caption}
+                    </p>
+                </div>
             </div>
 
         )
