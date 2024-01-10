@@ -26,7 +26,7 @@ export default function Register({ currentUser, setCurrentUser }) {
                 username,
                 password
             }
-            let response = await axios.post('http://localhost:8000/users/register', form)
+            let response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/register`, form)
             let { token } = response.data
             console.log(token)
             localStorage.setItem('jwt', token)
@@ -49,7 +49,7 @@ export default function Register({ currentUser, setCurrentUser }) {
                 email,
                 password
             }
-            let login = await axios.post('http://localhost:8000/users/login', form)
+            let login = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, form)
 
             let { token } = login.data
             localStorage.setItem('jwt', token)
